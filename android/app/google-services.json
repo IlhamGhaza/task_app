@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "355859219298",
+    "project_id": "todo-cfe3b",
+    "storage_bucket": "todo-cfe3b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:355859219298:android:659895ca6ec26bab18e23b",
+        "android_client_info": {
+          "package_name": "com.igz.task_app"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAqF3EAQKie-B-iSOTjWgjXsI63XGI6irA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

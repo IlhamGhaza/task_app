@@ -2,9 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
 class AppTheme {
-  // Colors
-  static const Color primaryColor = Color(0xFF4A6572);
-  static const Color accentColor = Color(0xFFF9AA33);
+  // Colors updated to match logo
+  static const Color primaryColor = Color(0xFF8559DA); // Purple from logo
+  static const Color accentColor = Color(0xFFFAAA33); // Yellow/orange from logo
+  static const Color secondaryAccentColor = Color(
+    0xFF5C4CDD,
+  ); // Blue checkmark color
   static const Color lightBackgroundColor = Color(0xFFF5F5F7);
   static const Color darkBackgroundColor = Color(0xFF303030);
   static const Color cardColorLight = Colors.white;
@@ -20,7 +23,7 @@ class AppTheme {
   static const Color priorityLow = Color(0xFF81C784);
 
   // Error & Success
-  static const Color errorColor = Color(0xFFB00020);
+  static const Color errorColor = Color.fromARGB(255, 255, 7, 52);
   static const Color successColor = Color(0xFF388E3C);
 
   // Elevation
@@ -40,6 +43,7 @@ class AppTheme {
       colorScheme: ColorScheme.light(
         primary: primaryColor,
         secondary: accentColor,
+        tertiary: secondaryAccentColor,
         background: lightBackgroundColor,
         error: errorColor,
         surface: cardColorLight,
@@ -60,7 +64,7 @@ class AppTheme {
           fontWeight: FontWeight.w600,
           color: Colors.white,
         ),
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       textTheme: GoogleFonts.nunitoSansTextTheme().copyWith(
         titleLarge: GoogleFonts.nunitoSans(
@@ -97,13 +101,16 @@ class AppTheme {
           borderRadius: defaultBorderRadius,
           borderSide: BorderSide(color: primaryColor, width: 2),
         ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 16,
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: primaryColor,
           foregroundColor: Colors.white,
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(borderRadius: defaultBorderRadius),
           elevation: defaultElevation,
           textStyle: GoogleFonts.nunitoSans(
@@ -115,7 +122,7 @@ class AppTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: primaryColor,
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           textStyle: GoogleFonts.nunitoSans(
             fontSize: 14,
             fontWeight: FontWeight.w600,
@@ -128,9 +135,9 @@ class AppTheme {
         elevation: cardElevation,
       ),
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color>((states) {
-          if (states.contains(MaterialState.selected)) {
-            return primaryColor;
+        fillColor: WidgetStateProperty.resolveWith<Color>((states) {
+          if (states.contains(WidgetState.selected)) {
+            return secondaryAccentColor; // Blue checkmark color
           }
           return Colors.grey.shade400;
         }),
@@ -147,6 +154,7 @@ class AppTheme {
       colorScheme: ColorScheme.dark(
         primary: primaryColor,
         secondary: accentColor,
+        tertiary: secondaryAccentColor,
         background: darkBackgroundColor,
         error: errorColor,
         surface: cardColorDark,
@@ -167,7 +175,7 @@ class AppTheme {
           fontWeight: FontWeight.w600,
           color: Colors.white,
         ),
-        iconTheme: IconThemeData(color: Colors.white),
+        iconTheme: const IconThemeData(color: Colors.white),
       ),
       textTheme: GoogleFonts.nunitoSansTextTheme().copyWith(
         titleLarge: GoogleFonts.nunitoSans(
@@ -201,13 +209,16 @@ class AppTheme {
           borderRadius: defaultBorderRadius,
           borderSide: BorderSide(color: accentColor, width: 2),
         ),
-        contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+        contentPadding: const EdgeInsets.symmetric(
+          horizontal: 16,
+          vertical: 16,
+        ),
       ),
       elevatedButtonTheme: ElevatedButtonThemeData(
         style: ElevatedButton.styleFrom(
           backgroundColor: accentColor,
           foregroundColor: Colors.black,
-          padding: EdgeInsets.symmetric(horizontal: 24, vertical: 12),
+          padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 12),
           shape: RoundedRectangleBorder(borderRadius: defaultBorderRadius),
           elevation: defaultElevation,
           textStyle: GoogleFonts.nunitoSans(
@@ -219,7 +230,7 @@ class AppTheme {
       textButtonTheme: TextButtonThemeData(
         style: TextButton.styleFrom(
           foregroundColor: accentColor,
-          padding: EdgeInsets.symmetric(horizontal: 16, vertical: 8),
+          padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 8),
           textStyle: GoogleFonts.nunitoSans(
             fontSize: 14,
             fontWeight: FontWeight.w600,
@@ -232,9 +243,9 @@ class AppTheme {
         elevation: cardElevation,
       ),
       checkboxTheme: CheckboxThemeData(
-        fillColor: MaterialStateProperty.resolveWith<Color>((states) {
-          if (states.contains(MaterialState.selected)) {
-            return accentColor;
+        fillColor: WidgetStateProperty.resolveWith<Color>((states) {
+          if (states.contains(WidgetState.selected)) {
+            return secondaryAccentColor; // Blue checkmark color
           }
           return Colors.grey.shade700;
         }),
