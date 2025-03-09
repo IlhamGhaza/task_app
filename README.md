@@ -95,14 +95,22 @@ lib/
 
 ```javascript
 rules_version = '2';
+
 service cloud.firestore {
   match /databases/{database}/documents {
+    // Rules for tasks collection
     match /tasks/{taskId} {
       allow read, update, delete: if request.auth != null && request.auth.uid == resource.data.userId;
       allow create: if request.auth != null && request.auth.uid == request.resource.data.userId;
     }
+    
+    // Rules for users collection
+    match /users/{userId} {
+      allow read, write: if request.auth != null && request.auth.uid == userId;
+    }
   }
 }
+
 ```
 
 ## 📸 Screenshots
@@ -116,6 +124,7 @@ Light Theme
   <img src="screenshots/light/task_detailsl.jpg" width="200" alt="Task Details - Light Theme">
   <img src="screenshots/light/add_taskl.jpg" width="200" alt="Add Task - Light Theme">
   <img src="screenshots/light/settingsl.jpg" width="200" alt="Settings Screen - Light Theme">
+  <img src="screenshots/light/profilel.jpg" width="200" alt="Profile Screen - Light Theme">
 </div></br>
 
 Dark Theme
@@ -127,6 +136,7 @@ Dark Theme
   <img src="screenshots/dark/task_detailsd.jpg" width="200" alt="Task Details - Dark Theme">
   <img src="screenshots/dark/add_taskd.jpg" width="200" alt="Add Task - Dark Theme">
   <img src="screenshots/dark/settingsd.jpg" width="200" alt="Settings Screen - Dark Theme">
+  <img src="screenshots/dark/profiled.jpg" width="200" alt="Profile Screen - Dark Theme">
 </div></br>
 
 ## 📦 Dependencies

@@ -1,16 +1,22 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import '../model/task.dart';
 import '../model/user.dart';
 
 class DatabaseService {
   final String uid;
-  final CollectionReference tasksCollection = FirebaseFirestore.instance.collection('tasks');
-  final CollectionReference usersCollection = FirebaseFirestore.instance.collection('users');
+  final CollectionReference tasksCollection = FirebaseFirestore.instance
+      .collection('tasks');
+  final CollectionReference usersCollection = FirebaseFirestore.instance
+      .collection('users');
 
   DatabaseService({required this.uid});
 
   // Create a new user profile in Firestore
-  Future<void> createUserProfile({required String name, required String email}) async {
+  Future<void> createUserProfile({
+    required String name,
+    required String email,
+  }) async {
     return await usersCollection.doc(uid).set({
       'name': name,
       'email': email,
@@ -21,10 +27,18 @@ class DatabaseService {
   }
 
   // Get user profile stream
+  final CollectionReference userCollection = FirebaseFirestore.instance
+      .collection('users');
+
   Stream<UserProfile> get userProfile {
-    return usersCollection.doc(uid).snapshots().map((doc) {
-      return UserProfile.fromMap(doc.data() as Map<String, dynamic>, uid);
-    });
+    // Make sure to use a valid document ID here
+    String userId = FirebaseAuth.instance.currentUser?.uid ?? '';
+    return userCollection
+        .doc(userId)
+        .snapshots()
+        .map(
+          (snap) => UserProfile.fromMap(snap.data() as Map<String, dynamic> ?? {}, userId),
+        );
   }
 
   // Update user profile
@@ -42,15 +56,18 @@ class DatabaseService {
 
   // Get task statistics
   Stream<Map<String, dynamic>> get taskStats {
-    return tasksCollection
-        .where('userId', isEqualTo: uid)
-        .snapshots()
-        .map((snapshot) {
+    return tasksCollection.where('userId', isEqualTo: uid).snapshots().map((
+      snapshot,
+    ) {
       int total = snapshot.docs.length;
-      int completed = snapshot.docs
-          .where((doc) => (doc.data() as Map<String, dynamic>)['isCompleted'] == true)
-          .length;
-      
+      int completed =
+          snapshot.docs
+              .where(
+                (doc) =>
+                    (doc.data() as Map<String, dynamic>)['isCompleted'] == true,
+              )
+              .length;
+
       return {
         'total': total,
         'completed': completed,

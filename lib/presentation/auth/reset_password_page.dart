@@ -28,6 +28,13 @@ final _formKey = GlobalKey<FormState>();
     return loading
         ? Loading()
         : Scaffold(
+          appBar: AppBar(
+            leading: IconButton(
+              icon: Icon(Icons.arrow_back),
+              onPressed: () => widget.toggleView(),
+            ),
+            title: Text('Reset Password'),
+          ),
           body: SafeArea(
             child: Center(
               child: SingleChildScrollView(
@@ -39,12 +46,12 @@ final _formKey = GlobalKey<FormState>();
                       mainAxisAlignment: MainAxisAlignment.center,
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
-                        IconButton(
-                          icon: Icon(Icons.arrow_back),
-                          onPressed: () => widget.toggleView(),
-                          alignment: Alignment.topLeft,
-                          padding: EdgeInsets.zero,
-                        ),
+                        // IconButton(
+                        //   icon: Icon(Icons.arrow_back),
+                        //   onPressed: () => widget.toggleView(),
+                        //   alignment: Alignment.topLeft,
+                        //   padding: EdgeInsets.zero,
+                        // ),
                         SizedBox(height: size.height * 0.02),
                          Image.asset(
                           'assets/images/logo.png',

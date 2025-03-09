@@ -1,37 +1,37 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 class UserProfile {
+  final String userId;
   final String name;
   final String email;
   final String bio;
   final DateTime joinDate;
-  final String userId;
 
   UserProfile({
+    required this.userId,
     required this.name,
     required this.email,
     required this.bio,
     required this.joinDate,
-    required this.userId,
   });
 
-  // Factory to create a UserProfile from a Map (Firestore document)
-  factory UserProfile.fromMap(Map<String, dynamic> data, String id) {
-    return UserProfile(
-      name: data['name'] ?? '',
-      email: data['email'] ?? '',
-      bio: data['bio'] ?? '',
-      joinDate: data['joinDate']?.toDate() ?? DateTime.now(),
-      userId: id,
-    );
-  }
-
-  // Convert a UserProfile to a Map (for Firestore)
   Map<String, dynamic> toMap() {
     return {
+      'userId': userId,
       'name': name,
       'email': email,
       'bio': bio,
       'joinDate': joinDate,
-      'userId': userId,
     };
+  }
+
+  static UserProfile fromMap(Map<String, dynamic> map, String uid) {
+    return UserProfile(
+      userId: uid,
+      name: map['name'] ?? '',
+      email: map['email'] ?? '',
+      bio: map['bio'] ?? 'I am using the Task Manager app!',
+      joinDate: (map['joinDate'] as Timestamp).toDate(),
+    );
   }
 }

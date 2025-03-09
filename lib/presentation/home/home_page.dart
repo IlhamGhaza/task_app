@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:task_app/core/widget/shimmer_loading.dart';
+import '/core/widget/shimmer_loading.dart';
+import '/presentation/account/account_page.dart';
 
 import '../../core/theme/theme.dart';
 import '../../core/widget/loading.dart';
@@ -53,25 +52,7 @@ class _HomePageState extends State<HomePage> {
     Theme.of(context);
 
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Personal Task Manager'),
-        actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.logout),
-            onPressed: () async {
-              setState(() => _isLoading = true);
-              await _authLocalDatasource.deleteToken();
-              // await authService.signOut();
-              setState(() => _isLoading = false);
-              //push to login page
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(builder: (context) => Wrapper()),
-              );
-            },
-          ),
-        ],
-      ),
+      appBar: AppBar(title: Text('Personal Task Manager')),
       body: _buildBody(_uid!),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
@@ -119,7 +100,7 @@ class _HomePageState extends State<HomePage> {
         return SettingPage();
       case 3:
         // return AccountPage();
-        return Center(child: Text('Account page'));
+        return AccountPage();
       default:
         return _buildTaskList(uid, false);
     }
