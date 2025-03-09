@@ -8,7 +8,6 @@ A modern Flutter application for managing personal tasks with seamless Firebase 
 
 [![Task Manager Demo](screenshots/Cover.png)](https://www.youtube.com/watch?v=6mpTsdOo7ho)
 
-
 ## ✨ Features
 
 - **User Authentication**
