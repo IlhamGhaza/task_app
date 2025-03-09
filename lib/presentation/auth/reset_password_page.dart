@@ -42,14 +42,14 @@ final _formKey = GlobalKey<FormState>();
                         IconButton(
                           icon: Icon(Icons.arrow_back),
                           onPressed: () => widget.toggleView(),
-                          alignment: Alignment.centerLeft,
+                          alignment: Alignment.topLeft,
                           padding: EdgeInsets.zero,
                         ),
                         SizedBox(height: size.height * 0.02),
-                        Icon(
-                          Icons.lock_reset,
-                          size: 64,
-                          color: theme.primaryColor,
+                         Image.asset(
+                          'assets/images/logo.png',
+                          height: 100,
+                          width: 100,
                         ),
                         SizedBox(height: 16),
                         Text(

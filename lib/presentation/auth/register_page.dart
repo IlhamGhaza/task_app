@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../data/auth_local_datasource.dart';
+import '../home/home_page.dart';
 import '/data/service/auth_service.dart';
 
 import '../../core/widget/loading.dart';
@@ -13,6 +15,7 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final _authLocalDatasource = AuthLocalDatasource();
   final _formKey = GlobalKey<FormState>();
   String email = '';
   String password = '';
@@ -43,10 +46,10 @@ class _RegisterPageState extends State<RegisterPage> {
                       crossAxisAlignment: CrossAxisAlignment.stretch,
                       children: <Widget>[
                         SizedBox(height: size.height * 0.02),
-                        Icon(
-                          Icons.app_registration,
-                          size: 64,
-                          color: theme.primaryColor,
+                         Image.asset(
+                          'assets/images/logo.png',
+                          height: 100,
+                          width: 100,
                         ),
                         SizedBox(height: 16),
                         Text(
@@ -159,6 +162,21 @@ class _RegisterPageState extends State<RegisterPage> {
                                         error =
                                             'Please supply a valid email or this email is already in use';
                                         loading = false;
+                                      });
+                                    }
+                                    else {
+                                      await _authLocalDatasource.saveToken(
+                                        result.uid,
+                                      );
+
+                                      setState(() {
+                                        loading = false;
+                                        Navigator.pushReplacement(
+                                          context,
+                                          MaterialPageRoute(
+                                            builder: (context) => HomePage(),
+                                          ),
+                                        );
                                       });
                                     }
                                   }

@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:task_app/core/widget/shimmer_loading.dart';
@@ -34,7 +36,7 @@ class _HomePageState extends State<HomePage> {
 
   Future<void> _loadUserData() async {
     final token = await _authLocalDatasource.getToken();
-    print('Loaded token: $token'); // Debug log
+    //print('Loaded token: $token'); // Debug log
     setState(() {
       _uid = token;
       _isLoading = false;
@@ -47,7 +49,7 @@ class _HomePageState extends State<HomePage> {
       return Loading();
     }
 
-    final authService = Provider.of<AuthService>(context);
+    Provider.of<AuthService>(context);
     Theme.of(context);
 
     return Scaffold(
@@ -100,8 +102,8 @@ class _HomePageState extends State<HomePage> {
                 onPressed: () {
                   _navigateToTaskForm(context, _uid!);
                 },
-                child: Icon(Icons.add),
                 tooltip: 'Add Task',
+                child: Icon(Icons.add),
               )
               : null,
     );
@@ -216,7 +218,7 @@ class _HomePageState extends State<HomePage> {
                     decoration: BoxDecoration(
                       color: AppTheme.getPriorityColor(
                         task.priority,
-                      ).withOpacity(0.2),
+                      ).withValues(alpha: 0.2),
                       borderRadius: BorderRadius.circular(12),
                     ),
                     child: Text(
